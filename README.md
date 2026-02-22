@@ -18,3 +18,10 @@ Goal: Build a durable, asynchronous job runner for agent/tool tasks, with persis
 ```bash
 docker compose up -d
 ```
+
+3. Install app + dev dependencies and run tests:
+
+```bash
+pip install -e ".[dev]"
+pytest -q
+```
