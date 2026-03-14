@@ -3,6 +3,8 @@ from typing import Any, Dict
 from fastapi import APIRouter, status
 from pydantic import BaseModel
 
+from app.queue import enqueue
+
 router = APIRouter()
 
 
@@ -19,4 +21,6 @@ class CreateJobResponse(BaseModel):
 @router.post("/jobs", status_code=status.HTTP_201_CREATED, response_model=CreateJobResponse)
 def create_job(job: CreateJobRequest) -> CreateJobResponse:
     _ = job
-    return CreateJobResponse(job_id="stub-job-1", status="queued")
+    job_id = "stub-job-1"
+    enqueue(job_id)
+    return CreateJobResponse(job_id=job_id, status="queued")
